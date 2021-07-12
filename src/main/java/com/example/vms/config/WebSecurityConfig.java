@@ -13,7 +13,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//		http.csrf().disable();
+		http.csrf().disable();
 //
 //        http
 //                .authorizeRequests()//所有security全注解配置实现的开端，表示开始说明需要的权限  第一部分：拦截的路径     第二部分：访问该路径需要的权限

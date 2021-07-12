@@ -9,6 +9,7 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 public class CorsConfig {
     private CorsConfiguration buildConfig() {
+        System.out.println(111);
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         //  你需要跨域的地址  注意这里的 127.0.0.1 != localhost
         // * 表示对所有的地址都可以访问

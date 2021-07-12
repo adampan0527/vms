@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
  * @author Adam Pan
  * @since 2021-07-10
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/member")
 @Api(tags = "会员模块")
