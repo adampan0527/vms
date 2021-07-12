@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vms.mapper.CompanyMapper">
+
+    <insert id="paymentRemind">
+        insert into membercompanyfee (companyName, memberId, memberCompanyFeeAmount, memberCompanyFeePaid,
+                                      memberCompanyFeeCertificate, memberCompanyFeeChecked)
+        values (#{companyName}, #{memberId}, #{memberCompanyFeeAmount}, false, null, false);
+    </insert>
+    <insert id="newcompany">
+        insert into company (companyName, companyIntro, companyFee, companyAlipay, companyOwner)
+        values (#{companyName}, #{companyIntro}, 0, #{companyAlipay}, #{companyOwner});
+    </insert>
+    <select id="queryByName" resultType="com.example.vms.entity.Company">
+        select *
+        from company
+        where companyName = #{companyName};
+    </select>
+    <select id="allCompany" parameterType="com.example.vms.entity.Company"  resultType="com.example.vms.entity.Company">
+        select *
+        from company;
+    </select>
+</mapper>

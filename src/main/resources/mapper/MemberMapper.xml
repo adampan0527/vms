@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vms.mapper.MemberMapper">
+    <insert id="register">
+        insert into member (memberId, memberPwd, memberName, memberTel, memberSex, isAdmin)
+        values (#{memberId}, #{memberPwd}, #{memberName}, #{memberTel}, #{memberSex}, #{isAdmin});
+    </insert>
+
+    <select id="login" resultType="com.example.vms.entity.Member">
+        select *
+        from member
+        where memberId = #{memberId}
+    </select>
+
+    <select id="queryIdByName" resultType="java.lang.String">
+        select memberId
+        from member
+        where memberName = #{memberName};
+    </select>
+</mapper>

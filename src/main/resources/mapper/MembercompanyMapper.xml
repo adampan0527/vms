@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vms.mapper.MembercompanyMapper">
+
+    <insert id="insert">
+        insert into membercompany (companyName, memberId)
+        values (#{companyName}, #{memberId});
+    </insert>
+    <insert id="joincompany">
+        insert into membercompany (companyName, memberId)
+        values (#{companyName}, #{memberId});
+    </insert>
+    <delete id="kickout">
+        delete
+        from membercompany
+        where memberId = #{memberId}
+          and companyName = #{companyName};
+    </delete>
+    <select id="query" resultType="java.lang.Integer">
+        select count(*)
+        from membercompany
+        where memberId = #{memberId}
+          and companyName = #{companyName};
+    </select>
+</mapper>
