@@ -11,13 +11,43 @@
         insert into company (companyName, companyIntro, companyFee, companyAlipay, companyOwner)
         values (#{companyName}, #{companyIntro}, 0, #{companyAlipay}, #{companyOwner});
     </insert>
+    <update id="modifyIntro">
+        update company
+        set companyIntro = #{companyIntro}
+        where companyName = #{companyName};
+    </update>
+    <update id="modifyFee">
+        update company
+        set companyFee = #{companyFee}
+        where companyName = #{companyName};
+    </update>
+    <update id="modifyAlipay">
+        update company
+        set companyAlipay = #{companyAlipay}
+        where companyName = #{companyName};
+    </update>
     <select id="queryByName" resultType="com.example.vms.entity.Company">
         select *
         from company
         where companyName = #{companyName};
     </select>
-    <select id="allCompany" parameterType="com.example.vms.entity.Company"  resultType="com.example.vms.entity.Company">
+    <select id="allCompany" parameterType="com.example.vms.entity.Company" resultType="com.example.vms.entity.Company">
         select *
         from company;
+    </select>
+    <select id="myCompany" resultType="com.example.vms.entity.Company">
+        select *
+        from company
+        where companyOwner = #{companyOwner};
+    </select>
+    <select id="joinedCompany" resultType="com.example.vms.entity.Company">
+        select *
+        from company
+        where companyName in (
+            select membercompany.companyName
+            from membercompany
+            where memberId = #{memberId}
+        )
+          and companyOwner != #{memberId}
     </select>
 </mapper>

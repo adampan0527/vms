@@ -23,4 +23,10 @@ public interface MemberMapper extends BaseMapper<Member> {
                         @Param("memberSex") Boolean sex, @Param("isAdmin") Boolean isAdmin);
 
     public String queryIdByName(@Param("memberName") String name);
+
+    public Integer modifyTel(@Param("memberId") String memberid, @Param("memberTel") String tel);
+
+    public Integer modifySex(@Param("memberId") String memberid, @Param("memberSex") Boolean sex);
+
+    public Integer modifyPwd(@Param("memberId") String memberid, @Param("memberPwd") String pwd);
 }

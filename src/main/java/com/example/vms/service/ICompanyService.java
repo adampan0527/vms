@@ -25,4 +25,14 @@ public interface ICompanyService extends IService<Company> {
     public CompanyInfo queryByName(String companyname);
 
     public List<CompanyInfo> allCompany();
+
+    public List<CompanyInfo> myCompany(String memberid);
+
+    public List<CompanyInfo> joinedCompany(String memberid);
+
+    public Boolean modifyIntro(String companyname, String companyintro);
+
+    public Boolean modifyFee(String companyname, Float companyfee);
+
+    public Boolean modifyAlipay(String companyname, String companyalipay);
 }

@@ -5,6 +5,21 @@
         insert into member (memberId, memberPwd, memberName, memberTel, memberSex, isAdmin)
         values (#{memberId}, #{memberPwd}, #{memberName}, #{memberTel}, #{memberSex}, #{isAdmin});
     </insert>
+    <update id="modifyTel">
+        update member
+        set memberTel = #{memberTel}
+        where memberId = #{memberId}
+    </update>
+    <update id="modifySex">
+        update member
+        set memberSex = #{memberSex}
+        where memberId = #{memberId}
+    </update>
+    <update id="modifyPwd">
+        update member
+        set memberPwd = #{memberPwd}
+        where memberId = #{memberId}
+    </update>
 
     <select id="login" resultType="com.example.vms.entity.Member">
         select *

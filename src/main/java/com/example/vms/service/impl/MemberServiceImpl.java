@@ -44,4 +44,25 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
     public String queryIdByName(String name) {
         return memberMapper.queryIdByName(name);
     }
+
+    @Override
+    public Boolean modifyTel(String id, String tel) {
+        Integer x = memberMapper.modifyTel(id, tel);
+        return x==1;
+    }
+
+    @Override
+    public Boolean modifySex(String id, String sex) {
+        Boolean ss;
+        if(sex.equals("男")) ss=true;
+        else ss=false;
+        Integer x = memberMapper.modifySex(id, ss);
+        return x==1;
+    }
+
+    @Override
+    public Boolean modifyPwd(String id, String pwd) {
+        Integer x = memberMapper.modifyPwd(id, pwd);
+        return x==1;
+    }
 }

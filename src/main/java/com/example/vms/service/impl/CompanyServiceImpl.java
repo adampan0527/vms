@@ -71,4 +71,42 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
         }
         return res;
     }
+
+    @Override
+    public List<CompanyInfo> myCompany(String memberid) {
+        List<CompanyInfo> res = new ArrayList<>();
+        List<Company> list = companyMapper.myCompany(memberid);
+        for (Company company: list){
+            res.add(company.change());
+        }
+        return res;
+    }
+
+    @Override
+    public List<CompanyInfo> joinedCompany(String memberid) {
+        List<CompanyInfo> res = new ArrayList<>();
+        List<Company> list = companyMapper.joinedCompany(memberid);
+        for (Company company: list){
+            res.add(company.change());
+        }
+        return res;
+    }
+
+    @Override
+    public Boolean modifyIntro(String companyname, String companyintro) {
+        Integer x = companyMapper.modifyIntro(companyname, companyintro);
+        return x==1;
+    }
+
+    @Override
+    public Boolean modifyFee(String companyname, Float companyfee) {
+        Integer x = companyMapper.modifyFee(companyname, companyfee);
+        return x==1;
+    }
+
+    @Override
+    public Boolean modifyAlipay(String companyname, String companyalipay) {
+        Integer x = companyMapper.modifyAlipay(companyname, companyalipay);
+        return x==1;
+    }
 }

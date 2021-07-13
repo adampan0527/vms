@@ -26,4 +26,15 @@ public interface CompanyMapper extends BaseMapper<Company> {
     public Company queryByName(@Param("companyName") String companyname);
 
     public List<Company> allCompany();
+
+    public List<Company> myCompany(@Param("companyOwner") String companyowner);
+
+    public List<Company> joinedCompany(@Param("memberId") String memberid);
+
+    public Integer modifyIntro(@Param("companyName") String companyname, @Param("companyIntro") String intro);
+
+    public Integer modifyFee(@Param("companyName") String companyname, @Param("companyFee") Float companyfee);
+
+    public Integer modifyAlipay(@Param("companyName") String companyname, @Param("companyAlipay") String companyalipay);
+
 }

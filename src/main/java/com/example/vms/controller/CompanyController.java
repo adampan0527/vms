@@ -1,12 +1,8 @@
 package com.example.vms.controller;
 
 
-import com.example.vms.Req.AllCompanyReq;
-import com.example.vms.Req.NewCompanyReq;
-import com.example.vms.Req.PaymentRemindReq;
-import com.example.vms.Res.AllCompanyRes;
-import com.example.vms.Res.NewCompanyRes;
-import com.example.vms.Res.PaymentRemindRes;
+import com.example.vms.Req.*;
+import com.example.vms.Res.*;
 import com.example.vms.info.CompanyInfo;
 import com.example.vms.service.ICompanyService;
 import com.example.vms.util.ResultBean;
@@ -39,7 +35,7 @@ public class CompanyController {
         ResultBean<NewCompanyRes> res = new ResultBean<NewCompanyRes>();
         Boolean success = iCompanyService.newCompany(req.getCompanyname(), req.getCompanyintro(),
                 req.getCompanyalipay(), req.getMemberid());
-        if (success){
+        if (success) {
             res.setMsg("创建单位成功");
         } else {
             res.setMsg("创建单位失败");
@@ -68,8 +64,8 @@ public class CompanyController {
     }
 
     @CrossOrigin
-    @PostMapping("allcompany")
-    public ResultBean<AllCompanyRes> allcompany(@RequestBody AllCompanyReq req){
+    @PostMapping("/allcompany")
+    public ResultBean<AllCompanyRes> allcompany(@RequestBody AllCompanyReq req) {
         ResultBean<AllCompanyRes> res = new ResultBean<>();
         AllCompanyRes allCompanyRes = new AllCompanyRes();
         List<CompanyInfo> list = iCompanyService.allCompany();
@@ -79,4 +75,82 @@ public class CompanyController {
         return res;
     }
 
+    @CrossOrigin
+    @PostMapping("/modifyintro")
+    public ResultBean<ModifyIntroRes> modifyIntro(@RequestBody ModifyIntroReq req) {
+        ResultBean<ModifyIntroRes> res = new ResultBean<>();
+        Boolean x = iCompanyService.modifyIntro(req.getCompanyname(), req.getIntro());
+        if (x) {
+            res.setMsg("修改成功");
+        } else {
+            res.setMsg("修改失败");
+            res.setCode(ResultBean.FAIL);
+        }
+        return res;
+    }
+
+    @CrossOrigin
+    @PostMapping("/modifyfee")
+    public ResultBean<ModifyFeeRes> modifyFee(@RequestBody ModifyFeeReq req) {
+        ResultBean<ModifyFeeRes> res = new ResultBean<>();
+        Boolean x = iCompanyService.modifyFee(req.getCompanyname(), req.getFee());
+        if (x) {
+            res.setMsg("修改成功");
+        } else {
+            res.setMsg("修改失败");
+            res.setCode(ResultBean.FAIL);
+        }
+        return res;
+    }
+
+    @CrossOrigin
+    @PostMapping("/modifyalipay")
+    public ResultBean<ModifyAlipayRes> modifyAlipay(@RequestBody ModifyAlipayReq req) {
+        ResultBean<ModifyAlipayRes> res = new ResultBean<>();
+        Boolean x = iCompanyService.modifyAlipay(req.getCompanyname(), req.getAlipay());
+        if (x) {
+            res.setMsg("修改成功");
+        } else {
+            res.setMsg("修改失败");
+            res.setCode(ResultBean.FAIL);
+        }
+        return res;
+    }
+
+    @CrossOrigin
+    @PostMapping("/mycompany")
+    public ResultBean<GetMyCompanyRes> getMyCompany(@RequestBody GetMyCompanyReq req) {
+        ResultBean<GetMyCompanyRes> res = new ResultBean<>();
+        GetMyCompanyRes getMyCompanyRes = new GetMyCompanyRes();
+        List<CompanyInfo> list = new ArrayList<>();
+        list = iCompanyService.myCompany(req.getMemberid());
+        if (list == null) {
+            res.setMsg("查询失败");
+            res.setCode(ResultBean.FAIL);
+            return res;
+        }
+        getMyCompanyRes.setCompanyInfoList(list);
+        res.setData(getMyCompanyRes);
+        res.setMsg("查询成功");
+        return res;
+    }
+
+    @CrossOrigin
+    @PostMapping("/joinedcompany")
+    public ResultBean<GetJoinedCompanyRes> joinedCompany(@RequestBody GetJoinedCompanyReq req) {
+        ResultBean<GetJoinedCompanyRes> res = new ResultBean<>();
+        GetJoinedCompanyRes getJoinedCompanyRes = new GetJoinedCompanyRes();
+        List<CompanyInfo> list = new ArrayList<>();
+        list = iCompanyService.joinedCompany(req.getMemberid());
+        if (list == null) {
+            res.setMsg("查询失败");
+            res.setCode(ResultBean.FAIL);
+            return res;
+        }
+        getJoinedCompanyRes.setCompanyInfoList(list);
+        res.setData(getJoinedCompanyRes);
+        res.setMsg("查询成功");
+
+        return res;
+    }
 }

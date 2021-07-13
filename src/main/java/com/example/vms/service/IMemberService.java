@@ -21,4 +21,10 @@ public interface IMemberService extends IService<Member> {
     public Boolean register(String id, String pwd, String name, String tel, String sex);
 
     public String queryIdByName(String name);
+
+    public Boolean modifyTel(String id, String tel);
+
+    public Boolean modifySex(String id, String sex);
+
+    public Boolean modifyPwd(String id, String pwd);
 }

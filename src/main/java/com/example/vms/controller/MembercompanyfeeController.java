@@ -1,9 +1,9 @@
 package com.example.vms.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import com.example.vms.service.IMembercompanyfeeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -17,4 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/membercompanyfee")
 public class MembercompanyfeeController {
 
+    @Autowired
+    private IMembercompanyfeeService iMembercompanyfeeService;
 }

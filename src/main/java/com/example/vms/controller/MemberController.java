@@ -1,20 +1,19 @@
 package com.example.vms.controller;
 
 
-import com.example.vms.Req.AcceptApplyReq;
-import com.example.vms.Req.LoginReq;
-import com.example.vms.Req.RegisterReq;
-import com.example.vms.Res.AcceptApplyRes;
-import com.example.vms.Res.LoginRes;
-import com.example.vms.Res.RegisterRes;
-import com.example.vms.entity.Member;
+import com.example.vms.Req.*;
+import com.example.vms.Res.*;
 import com.example.vms.info.MemberInfo;
-import com.example.vms.service.ICompanyService;
+import com.example.vms.info.MembercompanyfeeInfo;
 import com.example.vms.service.IMemberService;
+import com.example.vms.service.IMembercompanyfeeService;
 import com.example.vms.util.ResultBean;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -32,6 +31,9 @@ public class MemberController {
 
     @Autowired
     private IMemberService iMemberService;
+
+    @Autowired
+    private IMembercompanyfeeService iMembercompanyfeeService;
 
     @CrossOrigin
     @PostMapping("/login")
@@ -81,4 +83,107 @@ public class MemberController {
 
         return res;
     }
+
+    @CrossOrigin
+    @PostMapping("/modifytel")
+    public ResultBean<ModifyMemberTelRes> modifyTel(@RequestBody ModifyMemberTelReq req){
+        ResultBean<ModifyMemberTelRes> res = new ResultBean<>();
+        Boolean x = iMemberService.modifyTel(req.getMemberid(), req.getTel());
+        if (x){
+            res.setMsg("修改成功");
+        } else {
+            res.setMsg("修改失败");
+            res.setCode(ResultBean.FAIL);
+        }
+        return res;
+    }
+
+    @CrossOrigin
+    @PostMapping("/modifysex")
+    public ResultBean<ModifyMemberSexRes> modifyTel(@RequestBody ModifyMemberSexReq req){
+        ResultBean<ModifyMemberSexRes> res = new ResultBean<>();
+        Boolean x = iMemberService.modifySex(req.getMemberid(), req.getSex());
+        if (x){
+            res.setMsg("修改成功");
+        } else {
+            res.setMsg("修改失败");
+            res.setCode(ResultBean.FAIL);
+        }
+        return res;
+    }
+
+    @CrossOrigin
+    @PostMapping("/modifypwd")
+    public ResultBean<ModifyMemberPwdRes> modifyTel(@RequestBody ModifyMemberPwdReq req){
+        ResultBean<ModifyMemberPwdRes> res = new ResultBean<>();
+        Boolean x = iMemberService.modifyPwd(req.getMemberid(), req.getPwd());
+        if (x){
+            res.setMsg("修改成功");
+        } else {
+            res.setMsg("修改失败");
+            res.setCode(ResultBean.FAIL);
+        }
+        return res;
+    }
+
+    @CrossOrigin
+    @PostMapping("/getremind")
+    public ResultBean<GetRemindRes> getremind(@RequestBody GetRemindReq req){
+        ResultBean<GetRemindRes> res = new ResultBean<>();
+        GetRemindRes getRemindRes = new GetRemindRes();
+        List<MembercompanyfeeInfo> list = new ArrayList<>();
+        list = iMembercompanyfeeService.showUnpaid(req.getMemberid());
+        getRemindRes.setList(list);
+        res.setData(getRemindRes);
+        res.setMsg("获取成功");
+        return res;
+    }
+
+    @CrossOrigin
+    @PostMapping("/submitcertificate")
+    public ResultBean<SubmitCertificateRes> submitcertificate(@RequestBody SubmitCertificateReq req){
+        ResultBean<SubmitCertificateRes> res = new ResultBean<>();
+        Boolean x = iMembercompanyfeeService.submitcertificate(req.getCertificate(), req.getId());
+        if (x) {
+            res.setMsg("提交成功");
+        } else {
+            res.setCode(ResultBean.FAIL);
+            res.setMsg("提交失败");
+        }
+        return res;
+    }
+
+    @CrossOrigin
+    @PostMapping("/confirmcertificate")
+    public ResultBean<ConfirmCertificateRes> confirm(@RequestBody ConfirmCertificateReq req){
+        ResultBean<ConfirmCertificateRes> res = new ResultBean<>();
+        Boolean x = iMembercompanyfeeService.confirmcertificate(req.getId());
+        if (x) {
+            res.setMsg("确认成功");
+        } else {
+            res.setCode(ResultBean.FAIL);
+            res.setMsg("确认失败");
+        }
+        return res;
+    }
+
+    @CrossOrigin
+    @PostMapping("/getpaidcertificate")
+    public ResultBean<GetPaidCertificateRes> getPaidCertificate(@RequestBody GetPaidCertificateReq req){
+        ResultBean<GetPaidCertificateRes> res = new ResultBean<>();
+        GetPaidCertificateRes getPaidCertificateRes = new GetPaidCertificateRes();
+        List<MembercompanyfeeInfo> list = new ArrayList<>();
+        list = iMembercompanyfeeService.showByCompany(req.getCompanyname());
+        if(list==null){
+            res.setMsg("查询失败");
+            res.setCode(ResultBean.FAIL);
+            return res;
+        }
+        getPaidCertificateRes.setPayments(list);
+        res.setData(getPaidCertificateRes);
+        res.setMsg("查询成功");
+
+        return res;
+    }
+
 }

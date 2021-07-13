@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.sql.Blob;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import com.example.vms.info.MembercompanyfeeInfo;
+import com.example.vms.util.MyBeanUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -21,8 +24,11 @@ public class Membercompanyfee implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId("companyId")
-    private String companyid;
+    @TableId("memberCompanyFeeId")
+    private Integer membercompanyfeeid;
+
+    @TableField("companyName")
+    private String companyname;
 
     @TableField("memberId")
     private String memberid;
@@ -39,5 +45,10 @@ public class Membercompanyfee implements Serializable {
     @TableField("memberCompanyFeeChecked")
     private Boolean membercompanyfeechecked;
 
+    public MembercompanyfeeInfo change(){
+        MembercompanyfeeInfo membercompanyfeeInfo = new MembercompanyfeeInfo();
+        MyBeanUtils.copyProperties(this, membercompanyfeeInfo);
+        return membercompanyfeeInfo;
+    }
 
 }

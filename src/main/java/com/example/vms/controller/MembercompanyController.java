@@ -5,11 +5,9 @@ import com.example.vms.Req.JoinCompanyReq;
 import com.example.vms.Req.KickOutReq;
 import com.example.vms.Res.JoinCompanyRes;
 import com.example.vms.Res.KickOutRes;
-import com.example.vms.service.IMemberService;
 import com.example.vms.service.IMembercompanyService;
 import com.example.vms.util.ResultBean;
 import io.swagger.annotations.Api;
-import jdk.jfr.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
