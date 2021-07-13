@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口
@@ -29,4 +31,5 @@ public interface MemberMapper extends BaseMapper<Member> {
     public Integer modifySex(@Param("memberId") String memberid, @Param("memberSex") Boolean sex);
 
     public Integer modifyPwd(@Param("memberId") String memberid, @Param("memberPwd") String pwd);
+
 }

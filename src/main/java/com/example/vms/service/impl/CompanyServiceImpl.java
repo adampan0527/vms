@@ -1,9 +1,12 @@
 package com.example.vms.service.impl;
 
 import com.example.vms.entity.Company;
+import com.example.vms.entity.Member;
 import com.example.vms.entity.Membercompany;
 import com.example.vms.info.CompanyInfo;
+import com.example.vms.info.MemberInfo;
 import com.example.vms.mapper.CompanyMapper;
+import com.example.vms.mapper.MemberMapper;
 import com.example.vms.mapper.MembercompanyMapper;
 import com.example.vms.service.ICompanyService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -29,6 +32,9 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
 
     @Resource
     private MembercompanyMapper membercompanyMapper;
+
+    @Resource
+    private MemberMapper memberMapper;
 
     @Override
     public Boolean paymentRemindSingle(String companyname, String memberid, Float amount) {
@@ -108,5 +114,16 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
     public Boolean modifyAlipay(String companyname, String companyalipay) {
         Integer x = companyMapper.modifyAlipay(companyname, companyalipay);
         return x==1;
+    }
+
+    @Override
+    public List<MemberInfo> allMember(String companyname) {
+        List<MemberInfo> res = new ArrayList<>();
+        List<Member> list = new ArrayList<>();
+        list = companyMapper.allMember(companyname);
+        for (Member member: list){
+            res.add(member.change());
+        }
+        return res;
     }
 }

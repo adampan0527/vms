@@ -29,7 +29,7 @@ public class MembercompanyController {
 
     @CrossOrigin
     @PostMapping("/kickout")
-    public ResultBean<KickOutRes> kickout(@RequestBody KickOutReq req){
+    public ResultBean<KickOutRes> kickOut(@RequestBody KickOutReq req){
         ResultBean<KickOutRes> res = new ResultBean<>();
         Boolean x = iMembercompanyService.kickout(req.getCompanyname(), req.getMembername());
         if(x){
@@ -43,7 +43,7 @@ public class MembercompanyController {
 
     @CrossOrigin
     @PostMapping("/joincompany")
-    public ResultBean<JoinCompanyRes> joincompany(@RequestBody JoinCompanyReq req){
+    public ResultBean<JoinCompanyRes> joinCompany(@RequestBody JoinCompanyReq req){
         ResultBean<JoinCompanyRes> res = new ResultBean<>();
         Boolean x = iMembercompanyService.joincompany(req.getCompanyname(), req.getMembername());
         if (x){

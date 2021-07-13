@@ -3,6 +3,7 @@ package com.example.vms.service;
 import com.example.vms.entity.Company;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.vms.info.CompanyInfo;
+import com.example.vms.info.MemberInfo;
 
 import java.util.List;
 
@@ -35,4 +36,6 @@ public interface ICompanyService extends IService<Company> {
     public Boolean modifyFee(String companyname, Float companyfee);
 
     public Boolean modifyAlipay(String companyname, String companyalipay);
+
+    public List<MemberInfo> allMember(String companyname);
 }

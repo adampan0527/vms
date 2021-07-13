@@ -2,6 +2,7 @@ package com.example.vms.mapper;
 
 import com.example.vms.entity.Company;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.vms.entity.Member;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -37,4 +38,5 @@ public interface CompanyMapper extends BaseMapper<Company> {
 
     public Integer modifyAlipay(@Param("companyName") String companyname, @Param("companyAlipay") String companyalipay);
 
+    public List<Member> allMember(@Param("companyName") String companyname);
 }

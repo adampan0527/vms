@@ -4,6 +4,8 @@ package com.example.vms.controller;
 import com.example.vms.Req.*;
 import com.example.vms.Res.*;
 import com.example.vms.info.CompanyInfo;
+import com.example.vms.info.MemberInfo;
+import com.example.vms.info.Minfo;
 import com.example.vms.service.ICompanyService;
 import com.example.vms.util.ResultBean;
 import io.swagger.annotations.Api;
@@ -31,7 +33,7 @@ public class CompanyController {
 
     @CrossOrigin
     @PostMapping("/newcompany")
-    public ResultBean<NewCompanyRes> newcompany(@RequestBody NewCompanyReq req) {
+    public ResultBean<NewCompanyRes> newCompany(@RequestBody NewCompanyReq req) {
         ResultBean<NewCompanyRes> res = new ResultBean<NewCompanyRes>();
         Boolean success = iCompanyService.newCompany(req.getCompanyname(), req.getCompanyintro(),
                 req.getCompanyalipay(), req.getMemberid());
@@ -46,7 +48,7 @@ public class CompanyController {
 
     @CrossOrigin
     @PostMapping("/paymentremind")
-    public ResultBean<PaymentRemindRes> paymentremind(@RequestBody PaymentRemindReq req) {
+    public ResultBean<PaymentRemindRes> paymentRemind(@RequestBody PaymentRemindReq req) {
         ResultBean<PaymentRemindRes> res = new ResultBean<PaymentRemindRes>();
         List<String> failedMember = new ArrayList<String>();
         failedMember = iCompanyService.paymentRemind(req.getName(), req.getMembers(), req.getAmount());
@@ -65,7 +67,7 @@ public class CompanyController {
 
     @CrossOrigin
     @PostMapping("/allcompany")
-    public ResultBean<AllCompanyRes> allcompany(@RequestBody AllCompanyReq req) {
+    public ResultBean<AllCompanyRes> allCompany(@RequestBody AllCompanyReq req) {
         ResultBean<AllCompanyRes> res = new ResultBean<>();
         AllCompanyRes allCompanyRes = new AllCompanyRes();
         List<CompanyInfo> list = iCompanyService.allCompany();
@@ -151,6 +153,39 @@ public class CompanyController {
         res.setData(getJoinedCompanyRes);
         res.setMsg("查询成功");
 
+        return res;
+    }
+
+    @CrossOrigin
+    @PostMapping("/allmember")
+    public ResultBean<AllMemberRes> allMember(@RequestBody AllMemberReq req){
+        ResultBean<AllMemberRes> res = new ResultBean<>();
+        AllMemberRes allMemberRes = new AllMemberRes();
+        List<MemberInfo> list = new ArrayList<>();
+        list = iCompanyService.allMember(req.getCompanyname());
+        if (list==null){
+            res.setMsg("查询出错");
+            res.setCode(ResultBean.FAIL);
+            return res;
+        }
+        List<Minfo> l = new ArrayList<>();
+        for(MemberInfo memberInfo:list){
+            Minfo m = new Minfo();
+            m.setMemberid(memberInfo.getMemberid());
+            m.setMembername(memberInfo.getMembername());
+            m.setMemberpwd(memberInfo.getMemberpwd());
+            if(memberInfo.getIsadmin()){
+                m.setMembersex("男");
+            } else {
+                m.setMembersex("女");
+            }
+            m.setMembertel(memberInfo.getMembertel());
+            m.setIsadmin(memberInfo.getIsadmin());
+            l.add(m);
+        }
+        allMemberRes.setMember(l);
+        res.setData(allMemberRes);
+        res.setMsg("查询成功");
         return res;
     }
 }

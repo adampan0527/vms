@@ -50,4 +50,13 @@
         )
           and companyOwner != #{memberId}
     </select>
+    <select id="allMember" parameterType="com.example.vms.entity.Member" resultType="com.example.vms.entity.Member">
+        select *
+        from member
+        where memberId = (
+            select membercompany.memberId
+            from membercompany
+            where companyName = #{companyName}
+        )
+    </select>
 </mapper>

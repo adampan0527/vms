@@ -100,7 +100,7 @@ public class MemberController {
 
     @CrossOrigin
     @PostMapping("/modifysex")
-    public ResultBean<ModifyMemberSexRes> modifyTel(@RequestBody ModifyMemberSexReq req){
+    public ResultBean<ModifyMemberSexRes> modifySex(@RequestBody ModifyMemberSexReq req){
         ResultBean<ModifyMemberSexRes> res = new ResultBean<>();
         Boolean x = iMemberService.modifySex(req.getMemberid(), req.getSex());
         if (x){
@@ -114,7 +114,7 @@ public class MemberController {
 
     @CrossOrigin
     @PostMapping("/modifypwd")
-    public ResultBean<ModifyMemberPwdRes> modifyTel(@RequestBody ModifyMemberPwdReq req){
+    public ResultBean<ModifyMemberPwdRes> modifyPwd(@RequestBody ModifyMemberPwdReq req){
         ResultBean<ModifyMemberPwdRes> res = new ResultBean<>();
         Boolean x = iMemberService.modifyPwd(req.getMemberid(), req.getPwd());
         if (x){
@@ -128,7 +128,7 @@ public class MemberController {
 
     @CrossOrigin
     @PostMapping("/getremind")
-    public ResultBean<GetRemindRes> getremind(@RequestBody GetRemindReq req){
+    public ResultBean<GetRemindRes> getRemind(@RequestBody GetRemindReq req){
         ResultBean<GetRemindRes> res = new ResultBean<>();
         GetRemindRes getRemindRes = new GetRemindRes();
         List<MembercompanyfeeInfo> list = new ArrayList<>();
@@ -141,7 +141,7 @@ public class MemberController {
 
     @CrossOrigin
     @PostMapping("/submitcertificate")
-    public ResultBean<SubmitCertificateRes> submitcertificate(@RequestBody SubmitCertificateReq req){
+    public ResultBean<SubmitCertificateRes> submitCertificate(@RequestBody SubmitCertificateReq req){
         ResultBean<SubmitCertificateRes> res = new ResultBean<>();
         Boolean x = iMembercompanyfeeService.submitcertificate(req.getCertificate(), req.getId());
         if (x) {
